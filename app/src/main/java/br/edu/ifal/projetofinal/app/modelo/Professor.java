@@ -1,4 +1,4 @@
-package br.edu.ifal.projetofinal.modelo;
+package br.edu.ifal.projetofinal.app.modelo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,22 +7,19 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Estudante{
+public class Professor extends Pessoa{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nome;
-    private Integer idade;
     @OneToOne
     private Turma turma;
 
-    public Estudante() {
+    public Professor() {
     }
 
-    public Estudante(String nome, Integer idade, Turma turma) {
-        this.nome = nome;
-        this.idade = idade;
+    public Professor(String nome, String cpf, String rj, Turma turma) {
+        super(nome, cpf, rj);
         this.turma = turma;
     }
 
@@ -34,22 +31,6 @@ public class Estudante{
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
-    }
-
     public Turma getTurma() {
         return turma;
     }
@@ -57,8 +38,5 @@ public class Estudante{
     public void setTurma(Turma turma) {
         this.turma = turma;
     }
-
-   
-
 
 }

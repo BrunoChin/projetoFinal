@@ -1,4 +1,4 @@
-package br.edu.ifal.projetofinal.modelo;
+package br.edu.ifal.projetofinal.app.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,24 +8,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 
 @Entity
-public class Responsavel{
+public class Turma{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
+    @OneToOne
+    private Professor professor;
     @ManyToOne
     private List<Estudante> estudantes;
 
-    public Responsavel() {
-        this.estudantes = new ArrayList<Estudante>();
+    public Turma(String nome, Professor professor) {
+        this.nome = nome;
+        this.professor = professor;
+        estudantes = new ArrayList<Estudante>();
     }
 
-    public Responsavel(String nome) {
-        this.nome = nome;
-        this.estudantes = new ArrayList<Estudante>();
+    public Turma() {
+        estudantes = new ArrayList<Estudante>();
     }
 
     public Long getId() {
@@ -42,6 +47,14 @@ public class Responsavel{
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     public List<Estudante> getEstudantes() {
