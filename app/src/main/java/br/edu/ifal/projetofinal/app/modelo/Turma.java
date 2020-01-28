@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
@@ -20,7 +20,7 @@ public class Turma{
     private String nome;
     @OneToOne
     private Professor professor;
-    @ManyToOne
+    @OneToMany
     private List<Estudante> estudantes;
 
     public Turma(String nome, Professor professor) {

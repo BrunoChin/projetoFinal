@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Estudante{
@@ -14,10 +14,15 @@ public class Estudante{
     private Long id;
     private String nome;
     private Integer idade;
-    @OneToOne
+    @ManyToOne
     private Turma turma;
 
     public Estudante() {
+    }
+
+    public Estudante(String nome, Integer idade) {
+        this.nome = nome;
+        this.idade = idade;
     }
 
     public Estudante(String nome, Integer idade, Turma turma) {
