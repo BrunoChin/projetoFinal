@@ -12,15 +12,14 @@ public class Professor extends Pessoa{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
-    private Turma turma;
+    // @OneToOne
+    // private Turma turma;
 
     public Professor() {
     }
 
-    public Professor(String nome, String cpf, String rj, Turma turma) {
+    public Professor(String nome, String cpf, String rj) {
         super(nome, cpf, rj);
-        this.turma = turma;
     }
 
     public Long getId() {
@@ -31,12 +30,12 @@ public class Professor extends Pessoa{
         this.id = id;
     }
 
-    public Turma getTurma() {
-        return turma;
-    }
+    // public Turma getTurma() {
+    //     return turma;
+    // }
 
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
+    // public void setTurma(Turma turma) {
+    //     this.turma = turma;
+    // }
 
 }

@@ -4,21 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import br.edu.ifal.projetofinal.app.modelo.Estudante;
 import br.edu.ifal.projetofinal.app.repositorios.RepositorioEstudante;
+import br.edu.ifal.projetofinal.app.repositorios.RepositorioProfessor;
+import br.edu.ifal.projetofinal.app.repositorios.RepositorioTurma;
 
 @SpringBootApplication
 public class DemoApplication {
 	@Autowired
-	RepositorioEstudante rp;
-	public DemoApplication(){
-		
-		Estudante e1 = new Estudante("Bruno", 18);
-		Estudante e2 = new Estudante("asdasd", 25);
-
-		rp.save(e1);
-		rp.save(e2);
-	}
+	RepositorioEstudante rpE;
+	@Autowired
+	RepositorioProfessor rpP;
+	@Autowired
+	RepositorioTurma rpT;
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}

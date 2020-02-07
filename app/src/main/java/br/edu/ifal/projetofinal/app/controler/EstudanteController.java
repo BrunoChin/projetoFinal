@@ -1,12 +1,12 @@
 package br.edu.ifal.projetofinal.app.controler;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +21,7 @@ public class EstudanteController{
     private RepositorioEstudante repositorioEstudante;
 
     @PostMapping("/add")
-    public Estudante addEstudante(Estudante estudante){
+    public Estudante addEstudante(@RequestBody Estudante estudante){
         try {
             return repositorioEstudante.save(estudante);
         } catch (Exception e) {
@@ -35,32 +35,41 @@ public class EstudanteController{
         try {
             return repositorioEstudante.findAll();
         } catch (Exception e) {
-           return null
+           return null;
         }
     }
 
     @GetMapping("/getById/{id}")
     public Estudante GetEstudanteById(@PathVariable("id") Long id){
         try {
-            return repositorioEstudante.findById(id);
+            return repositorioEstudante.findById(id).get();
         } catch (Exception e) {
             return null;
         }
     }
 
     @GetMapping("/removeById/{id}")
-    public Estudante remove(@PathVariable("id") Long id){
+    public boolean remove(@PathVariable("id") Long id){
         try {
-            return repositorioEstudante.deleteById(id);
+            repositorioEstudante.deleteById(id);
+            return true;
         } catch (Exception e) {
-            return null;
+            return false;
         }
     }
 
-    @GetMapping("/update")
-    public Estudante updateEstudante(@PathVariable("id") Long ig, Estudante estudante){
+    @PostMapping("/update/{id}")
+    public Estudante updateEstudante(@PathVariable("id") Long id,@RequestBody Estudante estudanteNewInformecion){
         try {
-            return repositorioEstudante.save(estudante);
+            Estudante estudante = repositorioEstudante.findById(id).get();
+            if(estudante != null){
+                estudante.setNome(estudanteNewInformecion.getNome());
+                estudante.setIdade(estudanteNewInformecion.getIdade());;
+                return repositorioEstudante.save(estudante);
+            }
+            else{
+                return null;
+            }
         } catch (Exception e) {
             return null;
         }

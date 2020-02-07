@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Estudante{
@@ -13,23 +12,24 @@ public class Estudante{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    private Integer idade;
-    @ManyToOne
-    private Turma turma;
+    private int idade;
+    // @ManyToOne
+    // private Turma turma;
 
     public Estudante() {
+        
     }
 
-    public Estudante(String nome, Integer idade) {
+    public Estudante(String nome, int idade) {
         this.nome = nome;
         this.idade = idade;
     }
 
-    public Estudante(String nome, Integer idade, Turma turma) {
-        this.nome = nome;
-        this.idade = idade;
-        this.turma = turma;
-    }
+    // public Estudante(String nome, Integer idade, Turma turma) {
+    //     this.nome = nome;
+    //     this.idade = idade;
+    //     this.turma = turma;
+    // }
 
     public Long getId() {
         return id;
@@ -47,7 +47,7 @@ public class Estudante{
         this.nome = nome;
     }
 
-    public Integer getIdade() {
+    public int getIdade() {
         return idade;
     }
 
@@ -55,13 +55,13 @@ public class Estudante{
         this.idade = idade;
     }
 
-    public Turma getTurma() {
-        return turma;
-    }
+    // public Turma getTurma() {
+    //     return turma;
+    // }
 
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
+    // public void setTurma(Turma turma) {
+    //     this.turma = turma;
+    // }
 
    
 

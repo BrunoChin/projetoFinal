@@ -3,6 +3,7 @@ package br.edu.ifal.projetofinal.app.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,9 +19,9 @@ public class Turma{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    @OneToOne
+    @OneToOne( cascade = CascadeType.ALL)
     private Professor professor;
-    @OneToMany
+    @OneToMany( cascade = CascadeType.ALL)
     private List<Estudante> estudantes;
 
     public Turma(String nome, Professor professor) {
@@ -59,6 +60,10 @@ public class Turma{
 
     public List<Estudante> getEstudantes() {
         return estudantes;
+    }
+
+    public void addEstudante(Estudante estudante){
+        this.estudantes.add(estudante);
     }
 
     public void setEstudantes(List<Estudante> estudantes) {
