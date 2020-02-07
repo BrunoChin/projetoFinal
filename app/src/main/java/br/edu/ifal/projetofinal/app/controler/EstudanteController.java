@@ -20,56 +20,49 @@ public class EstudanteController{
     @Autowired
     private RepositorioEstudante repositorioEstudante;
 
-    @GetMapping("/add")
-    public ResponseEntity<?> addEstudante(Estudante estudante){
+    @PostMapping("/add")
+    public Estudante addEstudante(Estudante estudante){
         try {
-            repositorioEstudante.save(estudante);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return repositorioEstudante.save(estudante);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return null;
         }
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<Iterable<Estudante>> getAllEstudante(){
-        Iterable<Estudante> estudantes = repositorioEstudante.findAll();
-        if(estudantes != null){
-            return new ResponseEntity<Iterable<Estudante>>(estudantes, HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public List<Estudante> getAllEstudante(){
+        
+        try {
+            return repositorioEstudante.findAll();
+        } catch (Exception e) {
+           return null
         }
     }
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<Estudante> GetEstudanteById(@PathVariable("id") Long id){
-        Optional<Estudante> opcao = repositorioEstudante.findById(id);
-        if(opcao.isPresent()){
-            Estudante estudante = opcao.get();
-            return new ResponseEntity<Estudante>(estudante, HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+    public Estudante GetEstudanteById(@PathVariable("id") Long id){
+        try {
+            return repositorioEstudante.findById(id);
+        } catch (Exception e) {
+            return null;
         }
     }
 
-    @GetMapping("/removeById")
-    public ResponseEntity<?> remove(@PathVariable("id") Long id){
+    @GetMapping("/removeById/{id}")
+    public Estudante remove(@PathVariable("id") Long id){
         try {
-            repositorioEstudante.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return repositorioEstudante.deleteById(id);
         } catch (Exception e) {
-            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+            return null;
         }
     }
 
     @GetMapping("/update")
-    public ResponseEntity<?> updateEstudante(@PathVariable("id") Long ig, Estudante estudante){
+    public Estudante updateEstudante(@PathVariable("id") Long ig, Estudante estudante){
         try {
-            repositorioEstudante.save(estudante);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return repositorioEstudante.save(estudante);
         } catch (Exception e) {
-            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+            return null;
         }
     }
 }
