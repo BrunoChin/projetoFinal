@@ -4,13 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Professor{
+public class Administrador{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,24 +27,17 @@ public class Professor{
     @NotNull
     @NotEmpty
     private String senha;
+    private boolean admin;
 
-    public Professor() {
-    }
-
-    public Professor(String nome, String cpf, String rg, String senha) {
+    public Administrador(String nome, String cpf, String rg, String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
         this.senha = senha;
+        this.admin = true;;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    
 
     public String getNome() {
         return nome;
@@ -71,11 +63,24 @@ public class Professor{
         this.rg = rg;
     }
 
-    public String getSenha(){
+    public String getSenha() {
         return senha;
     }
 
-    public void setSenha(){
+    public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public boolean isAdmin(){
+        return admin;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

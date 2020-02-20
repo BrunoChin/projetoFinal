@@ -18,14 +18,15 @@ public class Turma{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nome;
+    
+    private String numero;
     @OneToOne( cascade = CascadeType.ALL)
     private Professor professor;
-    @OneToMany( cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Estudante> estudantes;
 
-    public Turma(String nome, Professor professor) {
-        this.nome = nome;
+    public Turma(String numero, Professor professor) {
+        this.numero = numero;
         this.professor = professor;
         estudantes = new ArrayList<Estudante>();
     }
@@ -42,12 +43,12 @@ public class Turma{
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public Professor getProfessor() {

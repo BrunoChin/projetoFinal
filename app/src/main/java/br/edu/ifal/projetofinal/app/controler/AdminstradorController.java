@@ -10,48 +10,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifal.projetofinal.app.modelo.Estudante;
-import br.edu.ifal.projetofinal.app.repositorios.RepositorioEstudante;
+import br.edu.ifal.projetofinal.app.modelo.Administrador;
+import br.edu.ifal.projetofinal.app.repositorios.RepositorioAdminstrador;
 
 @RestController
-@RequestMapping("/estudante")
-public class EstudanteController{
+@RequestMapping("/Administrador")
+public class AdminstradorController{
 
     @Autowired
-    private RepositorioEstudante repositorioEstudante;
+    RepositorioAdminstrador repositorioAdminstrador;
 
     @PostMapping("/add")
-    public Estudante addEstudante(@RequestBody Estudante estudante){
+    public Administrador add(@RequestBody Administrador administrador){
         try {
-            return repositorioEstudante.save(estudante);
+            return repositorioAdminstrador.save(administrador);
         } catch (Exception e) {
             return null;
         }
     }
 
     @GetMapping("/getAll")
-    public List<Estudante> getAllEstudante(){
-        
+    public List<Administrador> getAll(){
         try {
-            return repositorioEstudante.findAll();
-        } catch (Exception e) {
-           return null;
-        }
-    }
-
-    @GetMapping("/getById/{id}")
-    public Estudante GetEstudanteById(@PathVariable("id") Long id){
-        try {
-            return repositorioEstudante.findById(id).get();
+            return repositorioAdminstrador.findAll();
         } catch (Exception e) {
             return null;
         }
     }
 
-    @GetMapping("/removeById/{id}")
-    public boolean remove(@PathVariable("id") Long id){
+    @GetMapping("/getById/{id}")
+    public Administrador getById(@PathVariable("id") Long id){
         try {
-            repositorioEstudante.deleteById(id);
+            return repositorioAdminstrador.findById(id).get();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @PostMapping("/delete/{id}")
+    public boolean delete(@PathVariable("id") Long id){
+        try {
+            repositorioAdminstrador.deleteById(id);
             return true;
         } catch (Exception e) {
             return false;
@@ -59,9 +58,12 @@ public class EstudanteController{
     }
 
     @PostMapping("/update")
-    public Estudante updateEstudante(@RequestBody Estudante estudanteNewInformation){
+    public Administrador update(@RequestBody Administrador professorNewInformation){
         try {
-            return repositorioEstudante.save(estudanteNewInformation);
+            if(repositorioAdminstrador.findById(professorNewInformation.getId()).isPresent())
+                return repositorioAdminstrador.save(professorNewInformation);
+            else
+                return null;
         } catch (Exception e) {
             return null;
         }
